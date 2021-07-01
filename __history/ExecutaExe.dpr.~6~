@@ -1,0 +1,13 @@
+program ExecutaExe;
+
+uses
+  Vcl.Forms;
+
+{$R *.res}
+
+begin
+  //Application.Initialize;
+  //Application.MainFormOnTaskbar := True;
+  //Application.Run;
+  ShellExecute(0, 'open', PChar('x:\trunk\speedygerencial\bin' + '\SpeedySetup.exe'), '', '', SW_NORMAL);
+end.

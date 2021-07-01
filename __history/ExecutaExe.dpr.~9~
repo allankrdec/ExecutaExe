@@ -1,0 +1,41 @@
+program ExecutaExe;
+
+uses
+  Vcl.Forms,
+  Winapi.Windows,
+  System.IniFiles,
+  Winapi.ShellAPI;
+
+{$R *.res}
+
+function LerValorIni(ACaminhoIni, ASecao, AChave: String): String;
+var
+  ArqIni: TIniFile;
+begin
+  Result := '';
+  Try
+    if FileExists(ACaminhoIni) then
+    begin
+      try
+        ArqIni := TIniFile.Create(ACaminhoIni);
+        Result := ArqIni.ReadString(ASecao, AChave, '');
+      finally
+        ArqIni.Free;
+      end;
+    end
+    else
+      raise Exception.Create('Arquivo não encontrado.');
+  Except
+    on E: Exception do
+    begin
+      ShowMessage(Format('Ocorreu ler arquivo Ini "%s"' + #13#10 + 'Detalhe: %s', [E.ToString, ACaminhoIni]));
+    end;
+  End;
+end;
+
+begin
+  //Application.Initialize;
+  //Application.MainFormOnTaskbar := True;
+  //Application.Run;
+  ShellExecute(0, 'open', PChar('x:\trunk\speedygerencial\bin' + '\SpeedyERP.exe'), '', '', SW_NORMAL);
+end.
